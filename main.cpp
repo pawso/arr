@@ -8,15 +8,15 @@ int main()
 	// arr.Traverse();
 	
 	std::cout << "Adding 0 at index 0" << std::endl;
-	arr.Insert(0, 0);
+	arr.InsertAtIndex(0, 0);
 	arr.Traverse();
 	
 	std::cout << "Adding 1 at index 0" << std::endl;
-	arr.Insert(1, 0);
+	arr.InsertAtIndex(1, 0);
 	arr.Traverse();
 	
 	std::cout << "Adding 2 at index 0" << std::endl;
-	arr.Insert(2, 0);
+	arr.InsertAtIndex(2, 0);
 	arr.Traverse();
 	
 	
@@ -29,26 +29,26 @@ int main()
 	arr.Traverse();
 	
 	std::cout << "Replacing number at index 4 with number 6" << std::endl;
-	arr.Update(6, 4);
+	arr.UpdateAtIndex(6, 4);
 	arr.Traverse();
 	
 	std::cout << "Replacing number at index 0 with number 6" << std::endl;
-	arr.Update(6, 0);
+	arr.UpdateAtIndex(6, 0);
 	arr.Traverse();
 	
 	std::cout << "Replacing number at index 10 with number 6" << std::endl;
-	arr.Update(6, 10);
+	arr.UpdateAtIndex(6, 10);
 	arr.Traverse();
 	
 	std::cout << "Replacing number at index 5 with number 23" << std::endl;
-	arr.Update(23, 5);
+	arr.UpdateAtIndex(23, 5);
 	arr.Traverse();
 	
 	std::cout << "Replacing number at index 4 with number 23" << std::endl;
-	arr.Update(23, 4);
+	arr.UpdateAtIndex(23, 4);
 	arr.Traverse();
 	
 	std::cout << "Deleting number at index 0" << std::endl;
-	arr.Delete(0);
+	arr.DeleteAtIndex(0);
 	arr.Traverse();
 }

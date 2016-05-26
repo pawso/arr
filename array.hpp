@@ -10,16 +10,16 @@ public:
 	void Traverse(void);
 	
 	// insert element at index
-	void Insert(int element, size_t idx);
+	void InsertAtIndex(int element, size_t idx);
 	
 	// delete element at index
-	void Delete(size_t idx);
+	void DeleteAtIndex(size_t idx);
 	
 	// look for first occurencce of element given
 	size_t Search(int element);
 	
 	// update element at index
-	void Update(int element, size_t idx);
+	void UpdateAtIndex(int element, size_t idx);
 	
 	// Adds element at the end of array
 	void PushBack(int element);

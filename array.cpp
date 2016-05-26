@@ -12,7 +12,6 @@ Array::~Array(void)
 	free(storage);
 }
 
-// print all the values
 void Array::Traverse(void)
 {
 	if (size == 0) {
@@ -25,8 +24,7 @@ void Array::Traverse(void)
 	std::cout << std::endl;
 }
 
-// insert element at index idx
-void Array::Insert(int element, size_t idx)
+void Array::InsertAtIndex(int element, size_t idx)
 {
 	if (idx > (int) size - 1) {
 		std::cout << "Idx is out of bounds" << std::endl;
@@ -47,8 +45,7 @@ void Array::Insert(int element, size_t idx)
 	size++;
 }
 
-// delete element at index
-void Array::Delete(size_t idx)
+void Array::DeleteAtIndex(size_t idx)
 {
 	if (idx > size - 1) {
 		std::cout << "Index idx = " << idx << " out of bound" << std::endl;
@@ -68,7 +65,6 @@ void Array::Delete(size_t idx)
 	storage = newStorage;
 }
 
-// look for element given
 size_t Array::Search(int element)
 {
 	for (size_t i = 0; i < size; i++) {
@@ -79,8 +75,7 @@ size_t Array::Search(int element)
 	}
 }
 
-// update element at index
-void Array::Update(int element, size_t idx)
+void Array::UpdateAtIndex(int element, size_t idx)
 {
 	if (idx > size - 1) {
 		std::cout << "Index idx = " << idx << " out of bound" << std::endl;
@@ -90,8 +85,7 @@ void Array::Update(int element, size_t idx)
 	storage[idx] = element;
 }
 
-// Adds element at the end of array
 void Array::PushBack(int element)
 {
-	Insert(element, size - 1);
+	InsertAtIndex(element, size - 1);
 }
