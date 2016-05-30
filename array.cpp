@@ -1,18 +1,21 @@
 #include "array.hpp"
 #include <iostream>
 
-Array::Array(void)
+template <class T>
+Array<T>::Array(void)
 {
 	size = 0;
 	storage = NULL;
 }
 
-Array::~Array(void)
+template <class T>
+Array<T>::~Array(void)
 {
 	free(storage);
 }
 
-void Array::Traverse(void)
+template <class T>
+void Array<T>::Traverse(void)
 {
 	if (size == 0) {
 		std::cout << "Array size is zero" << std::endl;
@@ -24,14 +27,15 @@ void Array::Traverse(void)
 	std::cout << std::endl;
 }
 
-void Array::InsertAtIndex(int element, size_t idx)
+template <class T>
+void Array<T>::InsertAtIndex(T element, size_t idx)
 {
 	if (idx > (int) size - 1) {
 		std::cout << "Idx is out of bounds" << std::endl;
 		return;
 	}
 	
-	int* newStorage = (int*) realloc(storage, (size + 1) * sizeof(int));
+	T* newStorage = (T*) realloc(storage, (size + 1) * sizeof(T));
 	if (newStorage == NULL) {
 		std::cout << "Could insert object" << std::endl;
 		return;
@@ -45,7 +49,8 @@ void Array::InsertAtIndex(int element, size_t idx)
 	size++;
 }
 
-void Array::DeleteAtIndex(size_t idx)
+template <class T>
+void Array<T>::DeleteAtIndex(size_t idx)
 {
 	if (idx > size - 1) {
 		std::cout << "Index idx = " << idx << " out of bound" << std::endl;
@@ -57,7 +62,7 @@ void Array::DeleteAtIndex(size_t idx)
 		
 	size--;
 	
-	int* newStorage = (int*) realloc(storage, size * sizeof(int));
+	T* newStorage = (T*) realloc(storage, size * sizeof(T));
 	if (newStorage == NULL) {
 		std::cout << "Could insert object" << std::endl;
 		return;
@@ -65,7 +70,8 @@ void Array::DeleteAtIndex(size_t idx)
 	storage = newStorage;
 }
 
-size_t Array::Search(int element)
+template <class T>
+size_t Array<T>::Search(T element)
 {
 	for (size_t i = 0; i < size; i++) {
 		if (storage[i] == element) {
@@ -75,7 +81,8 @@ size_t Array::Search(int element)
 	}
 }
 
-void Array::UpdateAtIndex(int element, size_t idx)
+template <class T>
+void Array<T>::UpdateAtIndex(T element, size_t idx)
 {
 	if (idx > size - 1) {
 		std::cout << "Index idx = " << idx << " out of bound" << std::endl;
@@ -85,7 +92,12 @@ void Array::UpdateAtIndex(int element, size_t idx)
 	storage[idx] = element;
 }
 
-void Array::PushBack(int element)
+template <class T>
+void Array<T>::PushBack(T element)
 {
 	InsertAtIndex(element, size - 1);
 }
+
+// Declarations below to avoid linking errors
+template class Array<int>;
+template class Array<float>;
