@@ -17,11 +17,9 @@ Array<T>::~Array(void)
 template <class T>
 void Array<T>::Traverse(void)
 {
-	if (size == 0) {
-		std::cout << "Array size is zero" << std::endl;
-		return;
-	}
-	
+	if (size == 0)
+		throw "Empty array";
+
 	for (size_t i = 0; i < size; i++)
 		std::cout << "[" << i << "]" << storage[i] << std::endl;
 	std::cout << std::endl;
@@ -30,16 +28,13 @@ void Array<T>::Traverse(void)
 template <class T>
 void Array<T>::InsertAtIndex(T element, size_t idx)
 {
-	if (idx > (int) size) {
-		std::cout << "Idx is out of bounds" << std::endl;
-		return;
-	}
+	if (idx > (int) size)
+		throw "Index out of bounds";
 	
 	T* newStorage = (T*) realloc(storage, (size + 1) * sizeof(T));
-	if (newStorage == NULL) {
-		std::cout << "Could insert object" << std::endl;
-		return;
-	}
+	if (newStorage == NULL)
+		throw "Allocation failure";
+
 	storage = newStorage;
 	
 	for (int i = size - 1; i >= (int) idx; i--)
@@ -52,10 +47,8 @@ void Array<T>::InsertAtIndex(T element, size_t idx)
 template <class T>
 void Array<T>::DeleteAtIndex(size_t idx)
 {
-	if (idx > size - 1) {
-		std::cout << "Index idx = " << idx << " out of bound" << std::endl;
-		return;
-	}
+	if (idx > size - 1) 
+		throw "Index out of bounds";
 	
 	for (int i = idx; i < size - 1; i++)
 		storage[i] = storage[i+1];
@@ -63,10 +56,9 @@ void Array<T>::DeleteAtIndex(size_t idx)
 	size--;
 	
 	T* newStorage = (T*) realloc(storage, size * sizeof(T));
-	if (newStorage == NULL) {
-		std::cout << "Could insert object" << std::endl;
-		return;
-	}
+	if (newStorage == NULL)
+		throw "Allocation failure";
+
 	storage = newStorage;
 }
 
@@ -84,10 +76,8 @@ size_t Array<T>::Search(T element)
 template <class T>
 void Array<T>::UpdateAtIndex(T element, size_t idx)
 {
-	if (idx > size - 1) {
-		std::cout << "Index idx = " << idx << " out of bound" << std::endl;
-		return;
-	}
+	if (idx > (int) size - 1)
+		throw "Index out of bounds";
 	
 	storage[idx] = element;
 }
