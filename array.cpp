@@ -30,7 +30,7 @@ void Array<T>::Traverse(void)
 template <class T>
 void Array<T>::InsertAtIndex(T element, size_t idx)
 {
-	if (idx > (int) size - 1) {
+	if (idx > (int) size) {
 		std::cout << "Idx is out of bounds" << std::endl;
 		return;
 	}
@@ -95,7 +95,7 @@ void Array<T>::UpdateAtIndex(T element, size_t idx)
 template <class T>
 void Array<T>::PushBack(T element)
 {
-	InsertAtIndex(element, size - 1);
+	InsertAtIndex(element, size);
 }
 
 // Declarations below to avoid linking errors
