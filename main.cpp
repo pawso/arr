@@ -1,110 +1,68 @@
 #include "array.hpp"
 #include <iostream>
 
-void testInt()
+template <typename T>
+void testArray(float data[], int operation[], size_t size)
 {
-	std::cout << "=================================== Ints: " << std::endl; 
+	Array<T> arr;
+	size_t currPos = 0;
 	
-	Array<int> arr;
-	
-	std::cout << "Adding 0 at index 0" << std::endl;
-	arr.InsertAtIndex(0, 0);
-	arr.Traverse();
-	
-	std::cout << "Adding 1 at index 0" << std::endl;
-	arr.InsertAtIndex(1, 0);
-	arr.Traverse();
-	
-	std::cout << "Adding 2 at index 0" << std::endl;
-	arr.InsertAtIndex(2, 0);
-	arr.Traverse();
-	
-	std::cout << "Pushing back 3" << std::endl;
-	arr.PushBack(3);
-	arr.Traverse();
-	
-	std::cout << "Pushing back 4" << std::endl;
-	arr.PushBack(4);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 4 with number 6" << std::endl;
-	arr.UpdateAtIndex(6, 4);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 0 with number 6" << std::endl;
-	arr.UpdateAtIndex(6, 0);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 10 with number 6" << std::endl;
-	arr.UpdateAtIndex(6, 10);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 5 with number 23" << std::endl;
-	arr.UpdateAtIndex(23, 5);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 4 with number 23" << std::endl;
-	arr.UpdateAtIndex(23, 4);
-	arr.Traverse();
-	
-	std::cout << "Deleting number at index 0" << std::endl;
-	arr.DeleteAtIndex(0);
-	arr.Traverse();
-}
-
-void testFloat()
-{
-	std::cout << "=================================== Floats: " << std::endl;
-	Array<float> arr;
-	
-	std::cout << "Adding 0 at index 0" << std::endl;
-	arr.InsertAtIndex(0, 0);
-	arr.Traverse();
-	
-	std::cout << "Adding 1 at index 0" << std::endl;
-	arr.InsertAtIndex(1.1, 0);
-	arr.Traverse();
-	
-	std::cout << "Adding 2 at index 0" << std::endl;
-	arr.InsertAtIndex(2.2, 0);
-	arr.Traverse();
+	do {
+		float num1 = data[2 * currPos];
+		int num2 = data[2 * currPos + 1];
+		
+		switch (operation[currPos]) {
+			case 0:
+				std::cout << "Adding " << num1 << " at index " << num2 << std::endl;
+				arr.InsertAtIndex(num1, num2);
+				break;
+			case 1:
+				std::cout << "Pushing back " << num1 << std::endl;
+				arr.PushBack(num1);
+				break;
+			case 2:
+			std::cout << "Replacing number at index " << num2 << " with number " << num1 << std::endl;	
+				arr.UpdateAtIndex(num1, num2);
+				break;
+			case 3:
+				std::cout << "Deleting number at index " << num2 << std::endl;
+				arr.DeleteAtIndex(num2);
+				break;
+			default:
+				break;
+		}
+		
+		arr.Traverse();
+		currPos++;
+		
+		if (currPos >= size - 1)
+			break;
+		
+	} while (1);
 	
 	
-	std::cout << "Pushing back 3" << std::endl;
-	arr.PushBack(3.4);
-	arr.Traverse();
 	
-	std::cout << "Pushing back 4" << std::endl;
-	arr.PushBack(4.5);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 4 with number 6" << std::endl;
-	arr.UpdateAtIndex(6.6, 4);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 0 with number 6" << std::endl;
-	arr.UpdateAtIndex(6.7, 0);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 10 with number 6" << std::endl;
-	arr.UpdateAtIndex(6.8, 10);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 5 with number 23" << std::endl;
-	arr.UpdateAtIndex(23.9, 5);
-	arr.Traverse();
-	
-	std::cout << "Replacing number at index 4 with number 23" << std::endl;
-	arr.UpdateAtIndex(23.11, 4);
-	arr.Traverse();
-	
-	std::cout << "Deleting number at index 0" << std::endl;
-	arr.DeleteAtIndex(0);
-	arr.Traverse();
 }
 
 int main()
 {
-	testInt();
-	testFloat();
+	const size_t SIZE = 10;
+	
+	float *data = new float[SIZE * 2];
+	int *operations = new int[SIZE];
+	
+	for (int i = 0; i < SIZE; i++) {
+		data[i * 2] = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / SIZE));
+		data[i * 2 + 1] = static_cast <float> (rand()) / (static_cast <float> (RAND_MAX / SIZE));
+		operations[i] = rand() % 4;
+	}
+	
+	std::cout << " ----------------------- Testing on INTEGERS ----------------------- " << std::endl;
+	testArray<int>(data, operations, SIZE);
+	
+	std::cout << " ----------------------- Testing on FLOATS ----------------------- " << std::endl;
+	testArray<float>(data, operations, SIZE);
+	
+	delete[] data;
+	delete[] operations;
 }
